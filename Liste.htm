@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <title>Liste</title>
+    <link rel="shortcut icon" href="http://192.168.56.1:8888/livepreview-on.ico" type="image/ico">
+    <link rel="stylesheet" href="Liste_fichiers/main.css">
+    <style>
+		body{margin:0;padding:0;overflow:hidden}#lp-banner{position:fixed;font-family:Helvetica Neue,Helvetica,Arial,sans-serif;background-color:#2c90a5;color:white;height:50px;width:82px;left:92%;top:0;box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);list-style-type:none;margin:0;padding:0;align-items:center}.m-item{float:left;margin-right:8px;cursor:pointer}#lp-container{position:relative}iframe{width:100vw;height:100vh;overflow:hidden}#lp-small-top-header{font-size:70%;z-index:10;margin-right:12px;margin-top:4px}svg:hover path,svg:hover rect,svg:hover polygon{fill:#111}path,rect,polygon{fill:#fff}#lp-progress-svg circle{stroke-dashoffset:0;stroke:#666;stroke-width:2.5px}#lp-progress-svg #lp-progress-bar{stroke:#FF9F1E}#lp-progress-svg rect{fill:#666}#lp-toast{position:absolute;background:#ffffb7;border:1px solid #ffe55a;top:1%;right:45%;border-radius:3px;padding:0 5px;color:#555;font-family:arial,sans-serif;padding:2px 8px;display:none}.arrow{width:16px;height:16px;position:absolute;background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIGlkPSJDYXBhXzEiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgNDc3LjE3NSA0NzcuMTc1IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA0NzcuMTc1IDQ3Ny4xNzU7IiB4bWw6c3BhY2U9InByZXNlcnZlIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgY2xhc3M9IiI+PGc+PGc+Cgk8cGF0aCBkPSJNMTQ1LjE4OCwyMzguNTc1bDIxNS41LTIxNS41YzUuMy01LjMsNS4zLTEzLjgsMC0xOS4xcy0xMy44LTUuMy0xOS4xLDBsLTIyNS4xLDIyNS4xYy01LjMsNS4zLTUuMywxMy44LDAsMTkuMWwyMjUuMSwyMjUgICBjMi42LDIuNiw2LjEsNCw5LjUsNHM2LjktMS4zLDkuNS00YzUuMy01LjMsNS4zLTEzLjgsMC0xOS4xTDE0NS4xODgsMjM4LjU3NXoiIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIGNsYXNzPSJhY3RpdmUtcGF0aCIgc3R5bGU9ImZpbGw6I0U5RTlFOSIgZGF0YS1vbGRfY29sb3I9IiNFM0U1RTMiPjwvcGF0aD4KPC9nPjwvZz4gPC9zdmc+);background-size:contain}
+    </style>
+</head>
+<body onresize="windowResized()" datasqstyle="{&quot;top&quot;:0,&quot;position&quot;:&quot;static&quot;}" datasquuid="f346aec9-2dc7-47c8-83d8-39a1f5f8dd4f" style="top: 40px; position: relative;">
+<div id="dlg-qr" class="modal" datasqstyle="{&quot;top&quot;:null}" datasquuid="f346aec9-2dc7-47c8-83d8-39a1f5f8dd4f" style="top: 40px;" datasqtop="40">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span id="modal_close" class="close" onclick="closemodal()">×</span>
+            <p>Scan this QR code to open Live Preview tab on your phone/tablet</p>
+        </div>
+        <div id="qr-image" class="modal-body">
+        </div>
+    </div>
+</div>
+<div id="lp-container">
+    <div id="lp-banner" style="width: 92px; left: 1171px; top: 40px;" class="lp-beta-banner" datasqstyle="{&quot;top&quot;:null}" datasquuid="f346aec9-2dc7-47c8-83d8-39a1f5f8dd4f" datasqtop="40">
+		<div style="position:relative;">
+			<div id="lp-small-top-header" style="float:right;">
+				Live Preview
+			</div>
+			<div id="lp-slider" onmouseover="onmouseoverslider();" onmouseleave="onmouseleaveslider();">
+				<div id="lp-slider-head" style="height:50px;width:15px;float:left;display:block;">
+					<span style="top:18px" class="arrow"></span>
+				</div>
+				<div id="lp-slider-panel" style="height:43px;display:none;position:absolute;padding-left:8px;padding-top:8px;">
+					<div id="el_copyurltoclipboard" class="m-item" style="margin-top:14px;" title="copy url to clipboard.">
+						<svg xmlns:i="http://ns.adobe.com/AdobeIllustrator/10.0/" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 12.5" width="24px" height="24px"><g i:layer="yes" i:dimmedpercent="50" i:rgbtrio="#4F008000FFFF"><path i:knockout="Off" d="M2,5c0-1.7,1.3-3,3-3h2V0H5C2.2,0,0,2.2,0,5s2.2,5,5,5h2V8H5C3.3,8,2,6.7,2,5z M11,0H9v2h2       c1.7,0,3,1.3,3,3s-1.3,3-3,3H9v2h2c2.8,0,5-2.2,5-5S13.8,0,11,0z M5,6h6V4H5V6z"></path></g></svg>
+					</div>
+				</div>
+			</div>
+			<div style="height:24px; margin-top: 3px; margin-left:4px;top:17px;right:0px; position:absolute;">
+				<div id="lp-show-qr" class="m-item" title="copy url to mobile devices">
+					<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" style="margin-right: 4px;">
+						<g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+							<g fill="#000000" fill-rule="nonzero">
+								<path d="M0,23.9994627 L10.9088955,23.9994627 L10.9088955,13.0904478 L0,13.0904478 L0,23.9994627 Z M2.18161194,15.2724179 L8.72704478,15.2724179 L8.72704478,21.8008955 L2.18161194,21.8008955 L2.18161194,15.2724179 Z" id="Shape"></path>
+								<rect id="Rectangle-path" x="4.36352239" y="17.4540299" width="2.18173134" height="2.18202985"></rect>
+								<rect id="Rectangle-path" x="17.4538507" y="21.8178507" width="2.18226866" height="2.18179104"></rect>
+								<rect id="Rectangle-path" x="21.8174328" y="21.8178507" width="2.18220896" height="2.18179104"></rect>
+								<polygon id="Shape" points="21.8176716 15.2724179 19.6360597 15.2724179 19.6360597 13.0904478 13.0904478 13.0904478 13.0904478 23.9994627 15.2724179 23.9994627 15.2724179 17.4540299 17.4538507 17.4540299 17.4538507 19.6360597 23.9994627 19.6360597 23.9994627 13.0904478 23.9994627 13.0904478 21.8176716 13.0904478"></polygon>
+								<path d="M0,10.9091343 L10.9088955,10.9091343 L10.9088955,0 L0,0 L0,10.9091343 Z M2.18161194,2.18161194 L8.72704478,2.18161194 L8.72704478,8.72704478 L2.18161194,8.72704478 L2.18161194,2.18161194 Z" id="Shape"></path>
+								<rect id="Rectangle-path" x="4.36352239" y="4.36352239" width="2.18173134" height="2.18191045"></rect>
+								<path d="M13.0904478,0 L13.0904478,10.9091343 L23.9996418,10.9091343 L23.9996418,0 L13.0904478,0 Z M21.8176716,8.72704478 L15.2724179,8.72704478 L15.2724179,2.18161194 L21.8176716,2.18161194 L21.8176716,8.72704478 Z" id="Shape"></path>
+								<rect id="Rectangle-path" x="17.4538507" y="4.36352239" width="2.18226866" height="2.18191045"></rect>
+							</g>
+						</g>
+					</svg>
+				</div>
+				<div id="lp-progress-button" class="m-item" status="disable" title="Stop on-going conversion">
+					<svg id="lp-progress-svg" width="24" height="24" viewport="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
+						<circle r="10.5" cx="12" cy="12" fill="transparent" stroke-dasharray="65.97" stroke-dashoffset="0"></circle>
+						<circle id="lp-progress-bar" r="10.5" cx="12" cy="12" fill="transparent" stroke-dasharray="65.97" stroke-dashoffset="0" style="stroke-dashoffset: 65.9734px;"></circle>
+						<rect id="lp-progress-stop" x="7" y="7" rx="2" ry="2" width="10" height="10" stroke-width="0" style="fill: rgb(102, 102, 102);"></rect>
+					</svg>
+				</div>
+			</div>
+		</div>
+		<span id="lp-urlcopied" style="background-color: gray;top: 38px;position: relative;padding: 4px;display:none;">
+			<span>copied</span>
+		</span>
+    </div>
+    <iframe id="iframe-main" src="Liste_fichiers/Liste.htm" frameborder="0" onload="iframe_onload_handle()"></iframe>
+    <div id="lp-toast" style="display: none;">Live Preview is preparing the web page. Please wait..</div>
+</div>
+<input type="hidden" id="localip" value="192.168.56.1">
+<input id="localurl" value="http://192.168.56.1:8888/livepreview/Liste/Liste.htm">
+<script src="Liste_fichiers/qrcode.min.js"></script>
+<script type="text/javascript">
+	var localip = document.getElementById("localip").value,
+	localurl = window.location.protocol + "//" + localip + ":" + window.location.port + window.decodeURIComponent(window.location.pathname);
+	var el_localurl = document.getElementById("localurl");
+	el_localurl.value = localurl;
+	function onmouseoverslider(e){
+		var el_slider_head = document.getElementById("lp-slider-head");
+		var el_banner = document.getElementById("lp-banner");
+		var el_slider_panel = document.getElementById("lp-slider-panel");
+		el_slider_panel.setAttribute("style","display:block;height:43px;position:absolute;padding-left:8px;padding-top:8px;");
+		el_slider_head.setAttribute("style","width:0px;display:none");
+		el_banner.setAttribute("style","width:113px");
+		windowResized();}
+	function onmouseleaveslider(e){
+		var el_slider_head = document.getElementById("lp-slider-head");
+		var el_banner = document.getElementById("lp-banner");
+		var el_slider_panel = document.getElementById("lp-slider-panel");
+		el_slider_head.setAttribute("style","display:block;height:50px;width:15px;float:left;");
+		el_banner.setAttribute("style","width:92px");
+		el_slider_panel.setAttribute("style","display:none");
+		windowResized();}
+    var msg = {
+        lp_prepare:"Live Preview is preparing the web page. Please wait..",
+        lp_diconnect:"Live Preview has been turned off.",
+        lp_notaskstop:"There is no on-going conversion to stop.",
+        lp_taskstop:"The on-going conversion was stopped."};
+    function iframe_onload_handle() {
+        const el_iframe = document.getElementById('iframe-main'),
+            el_iframedoc = el_iframe.contentDocument || el_iframe.contentWindow.document;
+        document.title = el_iframedoc.title;
+        adjustBanner();
+        if(el_iframedoc.getElementById('formc')) {
+            var el_toast = document.getElementById('lp-toast');
+            el_toast.style.display = 'none';}}
+    function change_favicon(img) {
+        var favicon = document.querySelector('link[rel="shortcut icon"]');
+        if (!favicon) {
+            favicon = document.createElement('link');
+            favicon.setAttribute('rel', 'shortcut icon');
+            var head = document.querySelector('head');
+            head.appendChild(favicon);}
+        favicon.setAttribute('type', 'image/ico');
+        favicon.setAttribute('href', img);}
+    function displayQrDialog() {
+        var localip = document.getElementById("localip").value;
+        const localurl = window.location.protocol + "//" + localip + ":" + window.location.port + window.decodeURIComponent(window.location.pathname);
+        const el_qrimage = document.getElementById("qr-image");
+        var el_qrimage_canvases = el_qrimage.getElementsByTagName("canvas");
+        var el_qrimage_imgs = el_qrimage.getElementsByTagName("img");
+        for (var i = 0; el_qrimage_canvases.length; i++) {
+            el_qrimage.removeChild(el_qrimage_canvases[0]);}
+        for (var j = 0; el_qrimage_imgs.length; j++) {
+            el_qrimage.removeChild(el_qrimage_imgs[j]);}
+        new QRCode(document.getElementById("qr-image"), localurl);
+        document.getElementById("dlg-qr").style.display = 'block';};
+    function debounce(func, wait, immediate) {
+        var timeout;
+        return function() {
+            var context = this, args = arguments;
+            var later = function() {
+                timeout = null;
+                if (!immediate) func.apply(context, args);};
+            var callNow = immediate && !timeout;
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+            if (callNow) func.apply(context, args);};};
+    function adjustBanner() {
+	try{var el_iframe = document.getElementById('iframe-main'),
+            iframeDocWidth = el_iframe.contentDocument.documentElement.clientWidth || el_iframe.contentDocument.scrollingElement.clientWidth,
+            el_lp_banner = document.getElementById("lp-banner");
+        var lp_banner_width = iframeDocWidth - (el_lp_banner.clientWidth);
+        el_lp_banner.style.left = lp_banner_width + "px";
+		}catch(e){}}
+    function stopLivepreview() {
+        ws.send(JSON.stringify({'type': 'killprocess'}));
+        toast(msg.lp_taskstop);}
+    function updateProgressBar(val) {
+        var el_bar = document.getElementById('lp-progress-bar'),
+        r = el_bar.getAttribute('r'),
+        c = Math.PI*(r*2);
+        if (val < 0) { val = 0;}
+        if (val > 100) { val = 100;}
+        var pct = ((100-val)/100)*c;
+        el_bar.style.strokeDashoffset= pct;
+        if((val > 0 && val < 100)) {
+            document.getElementById('lp-progress-stop').style.fill = "#FF9F1E";
+            document.getElementById('lp-progress-button').setAttribute("status","enable");}
+			else{
+            document.getElementById('lp-progress-stop').style.fill = "#666";
+            document.getElementById('lp-progress-button').setAttribute("status","disable");}}
+    function toast(msg, timeout) {
+        var el_note = document.getElementById('lp-toast');
+        el_note.removeChild(el_note.firstChild);
+        el_note.appendChild(document.createTextNode(msg));
+        el_note.style.display='inline';
+        if(timeout){
+            setTimeout(function () {
+                el_note.style.display='none';
+            },5000);}}
+	function windowResized(event){debounce(adjustBanner(), 200, false);}
+    (function(){
+        const url_host = window.location.host;
+        window.ws = new WebSocket('ws://'+url_host);
+        updateProgressBar(0);
+        ws.onmessage = function(event){
+            const msg = JSON.parse(event.data);
+            switch (msg.type) {
+                case "reload":
+                    console.log('reload');
+                    document.getElementById('iframe-main').src = document.getElementById('iframe-main').src
+                    updateProgressBar(0);
+                    break;
+                case "reloading":
+                    console.log('reloading');
+                    break;
+                case 'stdout':
+                    console.log(msg.data);
+                    break;
+                case 'stderr':
+                    //console.error(msg.data);
+                    break;
+                case 'progress':
+                    document.title = msg.data;
+                    console.log(msg.data);
+                    var percentIndex = msg.data.indexOf('%');
+                    var percent = parseInt(msg.data.substring(0, percentIndex));
+                    console.log(percent);
+                    updateProgressBar(percent);
+                    break;
+                case 'log':
+                    console.log(msg.data);
+                    break;
+                case 'clcCounter':
+                    console.log("clcCounter: "+msg.data);
+                    console.log("clc is running:" +msg.clcRunning);
+                    if(msg.clcRunning) {
+                        //--document.getElementsByClassName("lp-beta-banner")[0].style.width = "200px";
+                        //--document.getElementById('btn_stop').style.display = "block";
+                        //--document.getElementById('clc_count').innerText = "[" + msg.data + "]";
+                    }
+                    break;
+                case 'clcStopped':
+                    console.log("clcstopped");
+                    var urlPath = window.decodeURIComponent(window.location.pathname);
+                    var filename = (urlPath.substring(urlPath.lastIndexOf('/')+1)).replace('.htm','');
+                    document.title = filename;
+                    updateProgressBar(0)
+                    break;
+                case 'setActiveSheet':
+                    const el_iframe = document.getElementById('iframe-main'),
+                        el_iframeDoc = el_iframe.contentDocument || el_iframe.contentWindow.document,
+                        el_iframeWin = el_iframe.contentWindow,
+                        $ = el_iframeWin.jQuery;
+                    var $sheet = $('#sheet-' + msg.data, el_iframeDoc.body);
+                    if(!$sheet.hasClass('tab-pane active')){
+                      $('.nav-tabs a[href="#' + $sheet.attr('id') + '"]', el_iframeDoc.body).tab('show');}
+                    if(!$sheet.hasClass('panel-collapse in')){
+                       $sheet.collapse('show');}
+                break;
+				case 'toast':
+					console.log(msg.data);
+					toast(msg.data);
+				break;
+			}
+        };
+        ws.onopen = function(event){
+            console.log('connection opened ********************');
+           change_favicon('/livepreview-on.ico');
+        }
+        ws.onclose = function(event){
+        console.log('connection closed ********************');
+        toast(msg.lp_diconnect)
+        change_favicon('/livepreview-off.ico');
+        }
+        var modal = document.getElementById('dlg-qr'),
+            el_modalclose = document.getElementById("modal_close"),
+            el_show_qr = document.getElementById("lp-show-qr"),
+            el_progress = document.getElementById("lp-progress-button"),
+            el_toast = document.getElementById('lp-toast'),
+			el_copyurltoclipboard = document.getElementById("el_copyurltoclipboard");
+        el_modalclose.onclick = function () {
+            modal.style.display = "none";
+        }
+        el_show_qr.onclick=function () {
+            displayQrDialog();
+        }
+        el_progress.onclick = function () {
+            var lp_status = document.getElementById('lp-progress-button').getAttribute("status");
+            if(lp_status === "enable"){
+            stopLivepreview();
+            }else{
+                toast(msg.lp_notaskstop,true);
+            }
+        }
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }};
+        el_toast.onclick = function(){el_toast.style.display='none';}
+        adjustBanner();
+        toast(msg.lp_prepare);
+		var clipboard = new ClipboardJS(el_copyurltoclipboard, {
+			target: function() {
+				return document.getElementById("localurl");
+			}
+		});
+		clipboard.on('success',function(e){
+			var el_urlcopied = document.getElementById("lp-urlcopied");
+			el_urlcopied.style.display="inline";
+			setTimeout(function(){el_urlcopied.style.display="none";},1000);});
+		})();
+</script>
+
+<div id="sqseobar2" class="sqseobar2-white sqseobar2-horizontal"><div class="sqseobar2-inner"><img src="Liste_fichiers/seoquake-icon.svg" class="sqseobar2-logo"><a class="sqseobar2-link sqseobar2-reloadButton sqseobar2-item-hidden"><span>Charger tous les paramètres</span></a><div class="sqseobar2-parameters"><div class="sqmore-container" style="width: 773px;"><div class="sqseobar2-parameters-container"><div class="sqseobar2-parameterItemInline"><span class="sqicn sqicn-google"></span><span class="sqseobar2-parameterItemInline-title sqseobar2-parameterItemInline-title-full">Google index</span><span class="sqseobar2-parameterItemInline-title">I</span><a href="https://www.google.com/search?hl=en&amp;safe=off&amp;q=site%3A192.168.56.1&amp;btnG=Search&amp;gws_rd=cr" target="_blank" class="seoquake-params-request">n/a</a></div><div class="sqseobar2-parameterItemInline"><span class="sqicn sqicn-semrush"></span><span class="sqseobar2-parameterItemInline-title sqseobar2-parameterItemInline-title-full">SEMrush backlinks</span><span class="sqseobar2-parameterItemInline-title">L</span><a href="https://www.semrush.com/analytics/backlinks/backlinks/?q=http%3A%2F%2F192.168.56.1%3A8888%2Flivepreview%2FListe%2FListe.htm&amp;searchType=url?utm_source=seoquake&amp;utm_medium=toolbar&amp;utm_campaign=params&amp;ref=174537735" target="_blank" class="seoquake-params-request">n/a</a></div><div class="sqseobar2-parameterItemInline"><span class="sqicn sqicn-semrush"></span><span class="sqseobar2-parameterItemInline-title sqseobar2-parameterItemInline-title-full">SEMrush subdomain backlinks</span><span class="sqseobar2-parameterItemInline-title">LD</span><a href="https://www.semrush.com/analytics/backlinks/backlinks/192.168.56.1:domain?utm_source=seoquake&amp;utm_medium=toolbar&amp;utm_campaign=params&amp;ref=174537735" target="_blank" class="seoquake-params-request">n/a</a></div><div class="sqseobar2-parameterItemInline"><span class="sqicn sqicn-bing"></span><span class="sqseobar2-parameterItemInline-title sqseobar2-parameterItemInline-title-full">Bing index</span><span class="sqseobar2-parameterItemInline-title">I</span><a href="https://www.bing.com/search?q=site%3A192.168.56.1&amp;FORM=QBRE" target="_blank" class="seoquake-params-request">n/a</a></div><div class="sqseobar2-parameterItemInline"><span class="sqicn sqicn-facebook"></span><span class="sqseobar2-parameterItemInline-title sqseobar2-parameterItemInline-title-full">Facebook likes</span><span class="sqseobar2-parameterItemInline-title">l</span><a href="https://www.facebook.com/v2.5/plugins/like.php?layout=button_count&amp;href=http%3A%2F%2F192.168.56.1%3A8888%2Flivepreview%2FListe%2FListe.htm" target="_blank" class="seoquake-params-request">n/a</a></div><div class="sqseobar2-parameterItemInline"><span class="sqicn sqicn-user"></span><a href="https://whois.domaintools.com/192.168.56.1?utm_source=seoquake&amp;utm_medium=seoquake&amp;utm_campaign=seoquake&amp;ref=174537735" target="_blank" class="seoquake-params-request">whois</a></div><div class="sqseobar2-parameterItemInline"><span class="sqicn sqicn-source"></span><a href="view-source:http://192.168.56.1:8888/livepreview/Liste/Liste.htm" target="_blank" class="seoquake-params-request">source</a></div><div class="sqseobar2-parameterItemInline"><span class="sqicn sqicn-semrush"></span><span class="sqseobar2-parameterItemInline-title sqseobar2-parameterItemInline-title-full">SEMrush Rank</span><span class="sqseobar2-parameterItemInline-title">Rank</span><a href="https://www.semrush.com/info/192.168.56.1?ref=174537735&amp;utm_source=seoquake&amp;utm_medium=toolbar&amp;utm_campaign=params" target="_blank" class="seoquake-params-request">n/a</a></div><div class="sqseobar2-parameterItemInline"><span class="sqicn sqicn-pinterest"></span><span class="sqseobar2-parameterItemInline-title sqseobar2-parameterItemInline-title-full">Pinterest Pin count</span><span class="sqseobar2-parameterItemInline-title">PIN</span><a href="https://api.pinterest.com/v1/urls/count.json?callback=r&amp;url=http%3A%2F%2F192.168.56.1%3A8888%2Flivepreview%2FListe%2FListe.htm" target="_blank" class="seoquake-params-request">0</a></div></div></div><button class="sqseobar2-button-more" style="visibility: hidden;">Plus de données</button></div><div class="sqseobar2-right-container"><div class="sqseobar2-right-container-buttons"><a class="sqseobar2-link sqseobar2-link-pageinfo"><span>Rapport de synthèse</span></a><a class="sqseobar2-link sqseobar2-link-diagnosis"><span>Diagnostic</span></a><a class="sqseobar2-link sqseobar2-link-density"><span>Densité</span></a><a class="sqseobar2-link sqseobar2-link-external"><span>Liens externes</span><span class="sqseobar2-link-value">0</span></a><a class="sqseobar2-link sqseobar2-link-internal"><span>Liens internes</span><span class="sqseobar2-link-value">1</span></a><a class="sqseobar2-link sqseobar2-link-siteaudit" href="#"><span>Audit de site</span><span class="sqseobar2-link-value">n/a</span></a></div><button class="sqseobar2-button-close" title="Fermer le panneau"></button><button class="sqseobar2-button-configure" title="Configurer le panneau"></button></div></div></div></body></html>
